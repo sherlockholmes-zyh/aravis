@@ -43,4 +43,4 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then meson configure -Dpacket-socket=false ; fi
   - meson configure
   - ninja
-  - ninja test
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then ninja test ; fi
