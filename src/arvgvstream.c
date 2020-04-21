@@ -41,7 +41,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#if ARAVIS_HAS_PACKET_SOCKET
+#if ARAVIS_HAS_PACKET_SOCKET == 1
 #include <ifaddrs.h>
 #include <netinet/udp.h>
 #include <net/if.h>
@@ -789,7 +789,7 @@ _loop (ArvGvStreamThreadData *thread_data)
 }
 
 
-#if ARAVIS_HAS_PACKET_SOCKET
+#if ARAVIS_HAS_PACKET_SOCKET == 1
 
 static void
 _set_socket_filter (int socket, guint32 source_ip, guint32 source_port, guint32 destination_ip, guint32 destination_port)
@@ -991,7 +991,7 @@ static void *
 arv_gv_stream_thread (void *data)
 {
 	ArvGvStreamThreadData *thread_data = data;
-#if ARAVIS_HAS_PACKET_SOCKET
+#if ARAVIS_HAS_PACKET_SOCKET == 1
 	int fd;
 #endif
 
@@ -1007,7 +1007,7 @@ arv_gv_stream_thread (void *data)
 	if (thread_data->callback != NULL)
 		thread_data->callback (thread_data->callback_data, ARV_STREAM_CALLBACK_TYPE_INIT, NULL);
 
-#if ARAVIS_HAS_PACKET_SOCKET
+#if ARAVIS_HAS_PACKET_SOCKET == 1
 	if (thread_data->use_packet_socket && (fd = socket (PF_PACKET, SOCK_RAW, g_htons (ETH_P_ALL))) >= 0) {
 		close (fd);
 		_ring_buffer_loop (thread_data);
