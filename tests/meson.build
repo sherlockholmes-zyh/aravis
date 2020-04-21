@@ -3,12 +3,12 @@ doc_examples = files (['arvexample.c', 'arvchunkparsertest.c'])
 if get_option('tests')
 
 	tests = [
-		['evaluator',	['no-network'],    []],
-		['buffer',	['no-network'],    []],
-		['misc',	['no-network'],    []],
-		['fake',	['no-network'],    ['-DGENICAM_FILENAME="@0@/src/arv-fake-camera.xml"'.format (meson.source_root ())]],
-		['fakegv',	['network'],	   ['-DGENICAM_FILENAME="@0@/src/arv-fake-camera.xml"'.format (meson.source_root ())]],
-		['genicam',	['no-network'],    ['-DGENICAM_FILENAME="@0@/tests/data/genicam.xml"'.format (meson.source_root ())]]
+		['evaluator',	['main'],    []],
+		['buffer',	['main'],    []],
+		['misc',	['main'],    []],
+		['fake',	['main'],    ['-DGENICAM_FILENAME="@0@/src/arv-fake-camera.xml"'.format (meson.source_root ())]],
+		['fakegv',	['network'], ['-DGENICAM_FILENAME="@0@/src/arv-fake-camera.xml"'.format (meson.source_root ())]],
+		['genicam',	['main'],    ['-DGENICAM_FILENAME="@0@/tests/data/genicam.xml"'.format (meson.source_root ())]]
 	]
 
 	foreach t: tests
@@ -17,7 +17,7 @@ if get_option('tests')
 				  link_with: aravis_library,
 				  dependencies: aravis_dependencies,
 				  include_directories: [library_inc])
-		test (t[0], exe, suite: 'main', label: t[1])
+		test (t[0], exe, suite: t[1])
 	endforeach
 
 	if get_option ('introspection')
@@ -38,7 +38,7 @@ if get_option('tests')
 			]
 
 			foreach t: python_tests
-				test (t[0], py, suite: 'python', label: ['no-network'], args: files (t[0]), env: environment)
+				test (t[0], py, suite: 'python', args: files (t[0]), env: environment)
 			endforeach
 		endif
 
