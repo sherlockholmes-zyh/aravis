@@ -1,7 +1,7 @@
 project ('aravis', 'c', 'cpp', version: '0.7.99', meson_version: '>=0.47.0')
 
-gnome = import('gnome')
 i18n = import ('i18n')
+gnome = import('gnome')
 pkg = import ('pkgconfig')
 
 aravis_version = meson.project_version ()
@@ -33,7 +33,6 @@ if enable_usb
 	aravis_dependencies += dependency ('libusb-1.0', required: true)
 endif
 
-subdir ('po')
 subdir ('src')
 subdir ('tests')
 
@@ -47,6 +46,7 @@ if get_option ('viewer')
 	aravis_viewer_dependencies = [aravis_dependencies, gtk_dep, gstreamer_base_dep, gstreamer_app_dep,
 		gstreamer_video_dep, notify_dep]
 
+	subdir ('po')
 	subdir ('viewer')
 endif
 
