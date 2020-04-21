@@ -1,6 +1,5 @@
 project ('aravis', 'c', 'cpp', version: '0.7.99', meson_version: '>=0.47.0')
 
-i18n = import ('i18n')
 gnome = import('gnome')
 pkg = import ('pkgconfig')
 
@@ -45,6 +44,8 @@ if get_option ('viewer')
 
 	aravis_viewer_dependencies = [aravis_dependencies, gtk_dep, gstreamer_base_dep, gstreamer_app_dep,
 		gstreamer_video_dep, notify_dep]
+
+	i18n = import ('i18n')
 
 	subdir ('po')
 	subdir ('viewer')
