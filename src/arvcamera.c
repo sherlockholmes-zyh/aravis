@@ -53,7 +53,7 @@
 #include <arvbuffer.h>
 #include <arvgc.h>
 #include <arvgvdevice.h>
-#if ARAVIS_HAS_USB
+#if ARAVIS_HAS_USB == 1
 #include <arvuvdevice.h>
 #endif
 #include <arvenums.h>
@@ -2555,7 +2555,7 @@ arv_camera_is_uv_device	(ArvCamera *camera)
 
 	g_return_val_if_fail (ARV_IS_CAMERA (camera), FALSE);
 
-#if ARAVIS_HAS_USB
+#if ARAVIS_HAS_USB == 1
 	return ARV_IS_UV_DEVICE (priv->device);
 #else
 	return FALSE;
