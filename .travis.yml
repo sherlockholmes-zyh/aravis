@@ -44,4 +44,4 @@ script:
   - meson configure
   - ninja
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then meson test ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then meson test --suite="main:no-network" ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then meson test --no-suite="network" ; fi
